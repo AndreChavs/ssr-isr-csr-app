@@ -1,4 +1,4 @@
-# Projeto de Troca de Dados usando Next.js
+# Projeto Next.js - Renderização do lado do servidor (SSR)
 
 Bem-vindo à documentação do projeto de Troca de Dados desenvolvido com Next.js! Este projeto utiliza Server-Side Rendering (SSR), Static Site Generation (SSG) e Server-Side Client Rendering (SCR) para criar uma aplicação fullstack simples de troca de dados entre o backend e o frontend. A aplicação permite registrar itens que serão exibidos como páginas individuais, semelhantes a páginas de produtos.
 
@@ -23,12 +23,6 @@ Bem-vindo à documentação do projeto de Troca de Dados desenvolvido com Next.j
 1. Configure a conexão com o MongoDB e/ou Firestore nos arquivos apropriados.
 2. Crie as tabelas ou coleções necessárias para armazenar os dados.
 
-## Iniciando o Servidor de Desenvolvimento
-
-Execute o seguinte comando para iniciar o servidor de desenvolvimento:
-
-```sh
-npm run dev
 
 # Funcionalidades
  ## Registro de Itens
