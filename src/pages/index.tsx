@@ -106,7 +106,7 @@ export default function Home({slides, carros}:{slides:DataGridState[], carros:Da
 
       {(slides)? <Slider slides={slides}/> : <div>{Loading()}</div>}
       
-      <div>        
+      <div style={{height: '100vh'}}>        
         <section>
           <div className="title-catalogo">
             <span>Escolha a categoria</span>
