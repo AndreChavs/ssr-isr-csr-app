@@ -14,7 +14,7 @@ export const getServerSideProps: GetServerSideProps<{carro: DataGridCar}> = asyn
   const id = context.query.id
   let carro
   if(id && typeof id == 'string'){
-    const response = await fetch(`http://localhost:3000/api/produtos/${id}`)
+    const response = await fetch(`${process.env.NEXT_API_URL}/api/produtos/${id}`)
     const json = await response.json()
     carro = json
   }
