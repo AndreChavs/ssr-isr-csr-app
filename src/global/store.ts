@@ -1,8 +1,13 @@
 import {create} from 'zustand';
+import { CarroRequest } from './interfaces/carro.interface';
+import { SlideRequest } from './interfaces/slide.interface';
+
+
+//---------------------Slide--------------------
 
 interface DataStore {
-  dataSlide: DataGridState[];
-  setDataSlide: (formData:(DataGridState)[] ) => void | null ;
+  dataSlide: SlideRequest[];
+  setDataSlide: (formData:(SlideRequest)[] ) => void | null ;
 }
 
 const useStore = create<DataStore>((set) => ({
@@ -11,7 +16,7 @@ const useStore = create<DataStore>((set) => ({
 }))
 
 
-//------------------------------------------------------------------
+//------------------------------------------------------
 
 interface TypeSidebar {
   active: boolean;
@@ -23,11 +28,11 @@ const useSidebar = create<TypeSidebar>( (set) => ({
   setActive: () => set((state) => ({active:!state.active}))
 }))
 
-//-------------------------------------------------------------------
+//---------------------Carros---------------------------------
 
 interface TypeDataCar {
-  dataCar : DataGridCar[],
-  setDataCar: (formData:(DataGridCar)[]) => void;
+  dataCar : CarroRequest[],
+  setDataCar: (formData:(CarroRequest)[]) => void;
 }
 const useCar = create<TypeDataCar>( (set) => ({
   dataCar: [],

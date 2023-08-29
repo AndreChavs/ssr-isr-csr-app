@@ -1,8 +1,9 @@
+import { SlideServices } from "@/global/interfaces/slide.interface";
 import React, { RefObject } from "react"
 import styles from '../../styles/modules/Slider.module.css'
 
 interface SliderProps{
-  slides: DataGridState[]
+  slides: SlideServices[]
   time?: boolean | number;
 }
 

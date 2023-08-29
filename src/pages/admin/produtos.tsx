@@ -1,5 +1,5 @@
 import React from 'react'
-import { InferGetStaticPropsType, NextPageContext } from 'next'
+import { NextPageContext } from 'next'
 import { getSession, useSession } from 'next-auth/react'
 import Sidebar from '@/layout/Sidebar'
 import Content from '@/layout/Content'

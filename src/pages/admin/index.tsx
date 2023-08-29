@@ -1,5 +1,5 @@
 import React from 'react'
-import { GetStaticProps, InferGetStaticPropsType, NextPageContext } from 'next'
+import { InferGetStaticPropsType, NextPageContext } from 'next'
 import { getSession, useSession } from 'next-auth/react'
 import Sidebar from '@/layout/Sidebar'
 import Content from '@/layout/Content'
@@ -7,14 +7,16 @@ import Container from '@/layout/Container'
 import DataGrid from '@/components/DataGrid'
 import { Grid12 } from '@/layout/Grid'
 import { useStore } from '@/global/store'
-import SlideRequests from '@/functions/requests/slide/slideRequests'
+import RequestData from '@/classes/requests/RequestData'
+import { SlideRequest } from '@/global/interfaces/slide.interface'
 
-const requestSlides = new SlideRequests('/api/sliders')
+
+const slideRequest = new RequestData()
 
 export async function getServerSideProps(context: NextPageContext) { 
-  console.log(requestSlides.url)
-  const session = await getSession(context)
-  const slides = await requestSlides.getRequest()    
+  
+  const session = await getSession(context)  
+  const slides = await slideRequest.getRequest<SlideRequest[]>('/api/sliders')    
   if (!session) {
     return {
       redirect: {

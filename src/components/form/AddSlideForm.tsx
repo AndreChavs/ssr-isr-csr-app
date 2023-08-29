@@ -3,9 +3,11 @@ import convertImageToBase64 from '@/functions/conversorBase64';
 import Image from 'next/image';
 import styles from '../../styles/modules/Form.module.css'
 import {useStore} from '../../global/store'
-import SlideRequests from '@/functions/requests/slide/slideRequests';
+import { AddSlideRequest } from '@/global/interfaces/slide.interface';
+import RequestData from '@/classes/requests/RequestData';
 
-const requestSlides = new SlideRequests('/api/sliders')
+
+const slideRequest = new RequestData()
 
 interface ModalProps{
   setModal:React.Dispatch<React.SetStateAction<boolean>>;
@@ -68,22 +70,18 @@ const AddSlideForm = ({setModal}: ModalProps) => {
   };
   
   const handleSubmit = async (event:React.FormEvent) => {
-    event.preventDefault();
-    // if(typeof image1 === 'string' && typeof image2 === 'string'){
-    //   throw new Error('Valor de imagem invalida')
-    // }
+    event.preventDefault();    
     if (image1 && image2 && typeof image1 !== 'string' && typeof image2 !== 'string') {
       setIsLoading(true);
-      const formData: DataGridState = {      
+      const formData: AddSlideRequest = {      
         image: image1,
         imageMobile: image2,
         button: checkbox,
         textButton: btnText,
         paragraph: text,
       }
-      if (typeof formData.image !== 'string' && typeof formData.imageMobile !== 'string') {                
-        // await postSlide(formData, setDataSlide)
-        await requestSlides.postRequest(formData, setDataSlide)
+      if (typeof formData.image !== 'string' && typeof formData.imageMobile !== 'string') {
+        await slideRequest.postSetDataRequest('/api/sliders',formData, setDataSlide)
       }               
       setIsLoading(false)
       setModal((modal) => !modal)      

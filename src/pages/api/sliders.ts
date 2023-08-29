@@ -1,20 +1,21 @@
-import {getSlides, postSlide, updateSlide, deleteSlide} from '../../functions/controllers/slide/slideController'
-
 import {NextApiRequest, NextApiResponse} from 'next'
-export default async function handler(req:NextApiRequest, res:NextApiResponse) { 
+import { SlideService } from '@/classes/services/SlideService.service';
+export default async function handler(req:NextApiRequest, res:NextApiResponse) {
+  
+  const slide = new SlideService()
 
   switch (req.method) {
-    case 'GET':
-      getSlides(req, res)
+    case 'GET':      
+      slide.getFindMany(req, res)
       break;
-    case 'POST':
-      postSlide(req, res)
+    case 'POST':      
+      slide.postAddNewSlide(req, res)
       break;
-    case 'PUT':
-      updateSlide(req, res)
+    case 'PUT':      
+      slide.updateSlide(req, res)
       break;
-    case 'DELETE':
-      deleteSlide(req, res)
+    case 'DELETE':      
+      slide.deleteSlide(req, res)
       break;
     default:
       res.status(405).json({error:"Requisição invalida"})

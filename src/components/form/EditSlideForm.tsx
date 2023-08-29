@@ -3,14 +3,14 @@ import styles from '../../styles/modules/Form.module.css'
 import Image from 'next/image'
 import convertImageToBase64 from '@/functions/conversorBase64'
 import { useStore } from '@/global/store';
-import SlideRequests from '@/functions/requests/slide/slideRequests';
+import RequestData from '@/classes/requests/RequestData';
+import { UpdateSlideRequest } from '@/global/interfaces/slide.interface';
 
-
-const requestSlide = new SlideRequests('/api/sliders')
+const slideRequest = new RequestData()
 
 interface EditSlideFormProps {
   setModal:React.Dispatch<React.SetStateAction<boolean>>;
-  editData:DataGridState;  
+  editData:UpdateSlideRequest;  
 }
 
 const EditSlideForm = ({editData, setModal}:EditSlideFormProps) => {
@@ -72,9 +72,9 @@ const EditSlideForm = ({editData, setModal}:EditSlideFormProps) => {
 
   const handleSubmit = async (event:React.FormEvent) => {
     event.preventDefault();
-    if (image1 && image2) {
+    if (image1 && image2 && editData.id) {
       setIsLoading(true)
-      const formData:DataGridState = {
+      const formData:UpdateSlideRequest = {
         id: editData.id,      
         image:image1,
         imageMobile:image2,
@@ -82,7 +82,7 @@ const EditSlideForm = ({editData, setModal}:EditSlideFormProps) => {
         textButton:btnText,
         paragraph: text
       }
-      await requestSlide.updateRequest(formData, setDataSlide)
+      await slideRequest.updateSetDataRequest('/api/sliders', formData, setDataSlide)
       setIsLoading(false)
       setModal((modal) => !modal)    
       

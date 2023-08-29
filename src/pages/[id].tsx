@@ -1,27 +1,28 @@
-import { GetServerSideProps, GetServerSidePropsContext, GetStaticPaths, GetStaticProps, InferGetServerSidePropsType, InferGetStaticPropsType, PreviewData } from "next";
+import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { useRouter } from 'next/router'
-import StaticGenerate from "@/functions/requests/StaticGenerate";
-import { ParsedUrlQuery } from "querystring";
-
-const requestGenerate = new StaticGenerate('/api/produtos', '/api/categoria/')
+import { CarroRequest } from "@/global/interfaces/carro.interface";
 
 
 
-export const getServerSideProps: GetServerSideProps<{carro: DataGridCar}> = async (context) => {
+export const getServerSideProps: GetServerSideProps<{carro: CarroRequest}> = async (context) => {
   const id = context.query.id
-  let carro
-  if(id && typeof id == 'string'){
-    const response = await fetch(`http://localhost:3000/api/produtos/${id}`)
-    const json = await response.json()
-    carro = json
-  }
-
+  if(!id || typeof id == 'object') throw new Error()  
+  
+  const response = await fetch(`${process.env.NEXT_API_URL}/api/produtos/${id}`)
+  const carro:CarroRequest = await response.json()
+  
+  if(carro.id !== id){
+    return {
+      notFound:true
+    }
+  } else {
     return {
       props: {carro}
     }
+  }
   
 }
 

@@ -1,14 +1,15 @@
-import Controller from "@/functions/controllers/produto/ProdutoController";
+import { CarroService } from "@/classes/services/CarroService.service";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(req:NextApiRequest, res:NextApiResponse) {
-  const id = req.query.id
-  const Service = new Controller()
+  const id = req.query.id;
+ 
+  const carro = new CarroService();
 
-  if(id && typeof id === 'string'){
+  if(id && typeof id === 'string' && id.length !== 0){
     switch(req.method){
-      case 'GET':
-        Service.GetDataById(req, res, id)
+      case 'GET':        
+        carro.GetFindById(req, res)
         break;
       
       default:
@@ -16,6 +17,6 @@ export default async function handler(req:NextApiRequest, res:NextApiResponse) {
         break;
     }
   }
-
+  
 
 }

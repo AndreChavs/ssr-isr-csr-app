@@ -4,15 +4,16 @@ import Image from 'next/image';
 import React from 'react'
 import styles from '../../../styles/modules/Modal.module.css'
 import stylesForm from '../../../styles/modules/Form.module.css'
-import ProdutoRequest from '@/functions/requests/produto/produtoRequest';
 import { useCar } from '@/global/store';
+import RequestData from '@/classes/requests/RequestData';
+import { UpdateCarroRequest } from '@/global/interfaces/carro.interface';
 
 interface ModalProps{
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
-  editData: DataGridCar;
+  editData: UpdateCarroRequest;
 }
 
-const requestProduto = new ProdutoRequest(`/api/produtos`)
+const carroRequest = new RequestData()
 
 const ModalEditProduto = ({setModal, editData}: ModalProps) => {  
   const [imagem, setImagem] = React.useState<{base64:string, fileData:FileData}>();
@@ -58,16 +59,17 @@ const ModalEditProduto = ({setModal, editData}: ModalProps) => {
   async function handleSubmit(event:React.FormEvent) {
     event.preventDefault()
     if(imagem && categoria && marca && modelo && ano){
-      const formData:DataGridCar = {
-        id: editData.id as string,
+      const formData:UpdateCarroRequest = {
+        id: editData.id,
         image: imagem,
         categoria: categoria,
         marca: marca,
         modelo: modelo,
         ano: ano
       }
-      
-      await requestProduto.updateRequest(formData, setDataCar)
+            
+      const response = await carroRequest.updateSetDataRequest('/api/produtos', formData, setDataCar)
+      alert(response)
       handleClose()
     }
   }

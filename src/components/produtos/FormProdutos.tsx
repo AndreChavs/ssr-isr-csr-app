@@ -3,10 +3,13 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
-import ProdutoRequest from '@/functions/requests/produto/produtoRequest';
 import convertImageToBase64 from '@/functions/conversorBase64';
+import RequestData from '@/classes/requests/RequestData';
+import { AddCarroRequest } from '@/global/interfaces/carro.interface';
+import { useCar } from '@/global/store';
 
-const requestProduto = new ProdutoRequest(`/api/produtos`)
+
+const carroRequest = new RequestData()
 
 export default function FormProdutos() {
   const [imagem, setImagem] = React.useState<{base64: string, fileData:FileData}>();
@@ -15,6 +18,8 @@ export default function FormProdutos() {
   const [modelo, setModelo] = React.useState<string | null>(null)
   const [ano, setAno] = React.useState<string | null>(null);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
+
+  const setDataCar = useCar((state) => state.setDataCar)
 
 
   // Função para exibir a imagem selecionada
@@ -40,16 +45,16 @@ export default function FormProdutos() {
     event.preventDefault()
     if (imagem && categoria && marca && modelo && ano) {
       setIsLoading(true);
-      const formData:DataGridCarFormData = {        
+      const formData: AddCarroRequest = {        
         image: imagem,
         categoria: categoria,
         modelo: modelo,
         marca: marca,
         ano: ano
       }
-      requestProduto.postRequest(formData).then( res => {
-        alert(res)
-      })
+      
+      const response = await carroRequest.postSetDataRequest('/api/produtos',formData, setDataCar)
+      alert(response)
       setIsLoading(false)
     } else {
       alert('Preencha os campos corretamente')

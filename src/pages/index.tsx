@@ -2,17 +2,12 @@ import React from 'react'
 import Head from 'next/head'
 import Slider from '../components/slider/Slider'
 import Container from '@/layout/Container'
-import { Title } from '@/components/interface/Title'
-import Link from 'next/link'
-import SquareCar from '@/components/interface/cards/SquareCar'
-import { Grid06 } from '@/layout/Grid'
-import Image from 'next/image'
-// import { getSlides } from '@/functions/requests/slide/slideRequests'
-
 import { FadeLoader } from 'react-spinners'
 import CardCar from '@/components/interface/cards/CardCar'
-import ProdutoRequest from '@/functions/requests/produto/produtoRequest'
-import SlideRequests from '@/functions/requests/slide/slideRequests'
+import RequestData from '@/classes/requests/RequestData'
+import { SlideRequest } from '@/global/interfaces/slide.interface'
+import { CarroRequest } from '@/global/interfaces/carro.interface'
+
 
 const categorias = [
   { nome: 'todos' },
@@ -24,13 +19,16 @@ const categorias = [
   { nome: 'esportivo' }
 ]
 
-const requestCars = new ProdutoRequest(`/api/produtos`);
-const requestSlides = new SlideRequests(`/api/sliders`)
-// console.log(process.env.NEXT_API_URL)
+
+const SlideRequests = new RequestData()
+const CarroRequest = new RequestData()
+
+
 
 export async function getServerSideProps() {
-  const slides = await requestSlides.getRequest();
-  const carros = await requestCars.getRequest();
+  
+  const slides = await SlideRequests.getRequest<SlideRequest[]>('/api/sliders')
+  const carros = await CarroRequest.getRequest<CarroRequest[]>('/api/produtos')
   return {
     props: {
       slides,
@@ -39,9 +37,9 @@ export async function getServerSideProps() {
   }
 }
 
-export default function Home({slides, carros}:{slides:DataGridState[], carros:DataGridCar[]}) {
+export default function Home({slides, carros}:{slides:SlideRequest[], carros:CarroRequest[]}) {
   
-  const [_carros, setCarros] = React.useState<DataGridCar[]>(carros)
+  const [_carros, setCarros] = React.useState<CarroRequest[]>(carros)
   const [active, setActive] = React.useState<string>('todos')  
   
                  
@@ -82,7 +80,7 @@ export default function Home({slides, carros}:{slides:DataGridState[], carros:Da
       return _carros.map( (carro, index) => {        
         return (
           <CardCar
-            src={carro.image as string}
+            src={carro.image}
             alt={`${carro.marca} - ${carro.modelo}`}
             ano={carro.ano} 
             key={index}            

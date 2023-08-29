@@ -2,10 +2,11 @@ import React from 'react'
 import Container from '@/layout/Container'
 import styles from '../../../styles/modules/Modal.module.css'
 import EditSlideForm from '@/components/form/EditSlideForm';
+import { UpdateSlideRequest } from '@/global/interfaces/slide.interface';
 
 interface ModalProps{
   setModal:React.Dispatch<React.SetStateAction<boolean>>;
-  editData:DataGridState;  
+  editData:UpdateSlideRequest;  
 }
 
 const ModalEditSlide = ({setModal, editData }:ModalProps) => {

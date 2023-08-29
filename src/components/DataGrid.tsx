@@ -11,9 +11,11 @@ import Modal from './interface/modals/Modal';
 import Image from 'next/image';
 import {useStore} from '@/global/store';
 import ModalEditSlide from './interface/modals/ModalEditSlide';
-import SlideRequests from '@/functions/requests/slide/slideRequests';
+import RequestData from '@/classes/requests/RequestData';
+import { SlideRequest } from '@/global/interfaces/slide.interface';
 
-const requestSlides = new SlideRequests('/api/sliders')
+
+const slideRequest = new RequestData()
 
 function EditToolbar() {
   const [modal, setModal] = React.useState<boolean>(false);
@@ -37,7 +39,7 @@ function EditToolbar() {
 
 export default function StartEditButtonGrid() {
   const [modalEdit, setModalEdit] = React.useState<boolean>(false)
-  const [editData, setEditData] = React.useState<DataGridState | null>(null)
+  const [editData, setEditData] = React.useState<SlideRequest | null>(null)
   
   const dataSlide = useStore((state) => state.dataSlide)
   const setDataSlide = useStore((state) => state.setDataSlide)
@@ -129,7 +131,7 @@ export default function StartEditButtonGrid() {
           })         
           const result = confirm(`Tem certeza que deseja apagar o item ${index  + 1} da lista ?`)
           if(result && typeof params.id === 'string'){
-            await requestSlides.deleteRequest(params.id, setDataSlide)
+            await slideRequest.deleteSetDataRequest('/api/sliders', params.id, setDataSlide)
           }  
         }
         return (
