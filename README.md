@@ -1,38 +1,58 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Projeto Next.js - Renderização do lado do servidor (SSR)
 
-## Getting Started
+Bem-vindo à documentação do projeto de Troca de Dados desenvolvido com Next.js! Este projeto utiliza Server-Side Rendering (SSR), Static Site Generation (SSG) e Server-Side Client Rendering (SCR) para criar uma aplicação fullstack simples de troca de dados entre o backend e o frontend. A aplicação permite registrar itens que serão exibidos como páginas individuais, semelhantes a páginas de produtos.
 
-First, run the development server:
+## Tecnologias Utilizadas
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+- Next.js: Framework React com suporte a SSR, SSG e SCR.
+- Prisma: ORM para interagir com o banco de dados.
+- Material UI: Biblioteca de componentes de interface.
+- Formik: Gerenciamento de formulários.
+- next-auth: Autenticação e autorização.
+- Zustand: Gerenciamento de estado.
+- MongoDB: Banco de dados NoSQL para armazenamento.
+- Firestore: Banco de dados NoSQL para armazenamento (opcional, se necessário).
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Configuração do Ambiente
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+1. Clone o repositório para a sua máquina local.
+2. Instale as dependências usando o comando: `npm install` ou `yarn install`.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## Configuração do Banco de Dados
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+1. Configure a conexão com o MongoDB e/ou Firestore nos arquivos apropriados.
+2. Crie as tabelas ou coleções necessárias para armazenar os dados.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+# Funcionalidades
+ ## Registro de Itens
 
-To learn more about Next.js, take a look at the following resources:
+Acesse a página de registro de itens.
+Preencha o formulário com as informações necessárias.
+Após o envio, os dados serão armazenados no banco de dados.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Visualização de Itens
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Cada item registrado terá sua própria página de detalhes.
+As páginas de detalhes serão renderizadas utilizando SSR.
+Acesse a página de detalhes ao clicar em um item na lista.
 
-## Deploy on Vercel
+## Autenticação de Usuário
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+A autenticação de usuário é gerenciada pelo next-auth.
+Configure as opções de autenticação de acordo com as suas necessidades.
+Proteja as rotas que exigem autenticação.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Gerenciamento de Estado
+
+O Zustand é utilizado para gerenciamento de estado.
+Mantenha o estado global da aplicação de forma eficiente.
+Atualize o estado ao adicionar ou modificar itens.
+
+## Deploy
+
+Você pode fazer o deploy deste projeto em plataformas como Vercel, Netlify ou similar. Certifique-se de configurar as variáveis de ambiente necessárias para a conexão com o banco de dados e outras configurações sensíveis.
+
+## Conclusão
+
+Este projeto de Troca de Dados usando Next.js oferece uma base sólida para criar uma aplicação fullstack com funcionalidades de SSR, SSG e SCR. Utilizando tecnologias como Prisma, Material UI, Formik, next-auth, Zustand, MongoDB e Firestore, você pode criar uma experiência de troca de dados eficiente e agradável para os usuários. Sinta-se à vontade para explorar, personalizar e expandir este projeto de acordo com suas necessidades!
