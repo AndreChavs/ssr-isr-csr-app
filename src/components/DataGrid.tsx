@@ -12,7 +12,7 @@ import Image from 'next/image';
 import {useStore} from '@/global/store';
 import ModalEditSlide from './interface/modals/ModalEditSlide';
 import RequestData from '@/classes/requests/RequestData';
-import { SlideRequest } from '@/global/interfaces/slide.interface';
+import { SlideRequest, UpdateSlideRequest } from '@/global/interfaces/slide.interface';
 
 
 const slideRequest = new RequestData()
@@ -39,7 +39,7 @@ function EditToolbar() {
 
 export default function StartEditButtonGrid() {
   const [modalEdit, setModalEdit] = React.useState<boolean>(false)
-  const [editData, setEditData] = React.useState<SlideRequest | null>(null)
+  const [editData, setEditData] = React.useState<UpdateSlideRequest | null>(null)
   
   const dataSlide = useStore((state) => state.dataSlide)
   const setDataSlide = useStore((state) => state.setDataSlide)

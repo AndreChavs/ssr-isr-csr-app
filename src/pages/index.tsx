@@ -86,7 +86,7 @@ export default function Home({slides, carros}:{slides:SlideRequest[], carros:Car
             key={index}            
             marca={carro.marca}
             modelo={carro.modelo}
-            href={`/${carro.id}`}            
+            href={`/carro/${carro.id}`}            
           />
         )
       })
