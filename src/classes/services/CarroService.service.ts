@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { PrismaClient } from "@prisma/client";
-import { FireStorage } from "@/functions/FireStorage";
+import { FireStorage } from "@/libs/FireStorage";
 import { AddCarroRequest, UpdateCarroRequest } from "@/global/interfaces/carro.interface";
 
 

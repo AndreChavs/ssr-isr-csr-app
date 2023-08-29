@@ -1,7 +1,6 @@
-import { FireStorage } from "@/functions/FireStorage";
-import { AddSlideRequest, SlideRequest, UpdateSlideRequest } from "@/global/interfaces/slide.interface";
+import { FireStorage } from "@/libs/FireStorage";
+import { AddSlideRequest, UpdateSlideRequest } from "@/global/interfaces/slide.interface";
 import { PrismaClient } from "@prisma/client";
-import { GetResult } from "@prisma/client/runtime";
 import { NextApiRequest, NextApiResponse } from "next";
 
 
