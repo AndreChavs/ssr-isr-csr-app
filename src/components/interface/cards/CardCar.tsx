@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { Grid03 } from "@/layout/Grid";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,15 +9,17 @@ interface CardCarProps{
   alt: string;
   marca: string;
   modelo: string;
-  ano?: string;
+  ano: string;
   href: string;
 }
 
 const CardCar = ({ano, marca, modelo, href, alt, src}:CardCarProps) => {
+  console.log(src)
   return (
     <Grid03 className={styles.card}>
       <div>
-        <Image src={src} width={380} height={300} alt={alt} />
+        {/* <Image src={src} width={0} height={0} alt={alt} /> */}
+        <img src={src} alt={alt} />
       </div>
       <div className={styles.content}>
         <ul>
